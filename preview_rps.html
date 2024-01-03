@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b91f07c834.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/bootstrap.css">
+    <title>Preview RPS</title>
+    <style>
+        .amikom-clr-2 {
+            color: #FFAC00;
+        }
+        .amikom-bg {
+            background-color: #4A1B9D;
+        }
+        .amikom-clr {
+            color: #4A1B9D;
+        }
+        .amikom-btn {
+            background-color: #4A1B9D;
+            color: white;
+        }
+        .amikom-btn:hover {
+            background-color: #5d2eae;
+            color: white;
+        }
+        .amikom-btn-2 {
+            letter-spacing: 2px;
+            background-color: #5d2eae;
+            color: white;
+        }
+        .amikom-btn-2:hover {
+            background-color: #3b0e88;
+            color: white;
+        }
+
+        .aktif {
+            background-color: #3b0e88;
+        }
+        table a {
+            text-decoration: none;
+            color: black;
+        }
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        
+        form label {
+            margin-top: 10px;
+            margin-left: 8px;
+            color: #4A1B9D;
+        }
+
+        form select, input {
+            border: 2px solid #4A1B9D;
+            font-size: 14px;
+            width: 50%;
+            height: 27px;
+            border-radius: 10px;
+            padding: 0 10px;
+        }
+        form textarea {
+            margin-bottom: 15px;
+            border: 2px solid #4A1B9D;
+            font-size: 14px;
+            border-radius: 10px;
+            padding: 0 10px;
+        }
+        
+        #detail {
+            width: 50%;
+        }
+        #detail label {
+            display: inline;
+            font-size: 14px;
+        }
+        #detail input {
+            float: right;
+            width: 100px;
+            height: 21px;
+            display: inline;
+            font-size: 12px;
+        }
+        #nm_dosen, #nik_dosen {
+            width: 100%;
+        }
+        #dosen {
+            width: 100%;
+        }
+        #rencanaEdit form label, #rencanaTambah form label {
+            margin-top: 10px;
+            margin-bottom: 4px;
+            color: #4A1B9D;
+            text-align: center;
+        }
+
+        #rencanaEdit form select, #rencanaEdit form input, #rencanaEdit form textarea, #rencanaTambah form select, #rencanaTambah form input, #rencanaTambah form textarea {
+            border: 2px solid #4A1B9D;
+            font-size: 14px;
+            width: 100%;
+            border-radius: 10px;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div style="height: 100vh;" class="row">
+            <div class="col-2 amikom-bg p-4 position-fixed bottom-0 top-0" >
+                <a class="ms-2" href="logout.php"><i class="fa-solid fa-power-off fa-xl" style="color: #ffffff;"></i></a>
+                
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-5  d-block" href="index.php?username=<?= $nama ?>">
+                    <i class="fa-solid fa-chart-line" style="color: #ffffff;"></i> Dashboard
+                </a>
+
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="buat.php?username=<?= $nama ?>">
+                    <i class="fa-solid fa-folder-plus fa-sm" style="color: #ffffff;"></i> Buat RPS
+                </a>
+
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="daftar.php?username=<?= $nama ?>">
+                    <i class="fa-solid fa-list fa-sm" style="color: #ffffff;"></i> Daftar RPS
+                </a>
+
+                <a class="btn aktif amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="">
+                    <i class="fa-solid fa-rectangle-list" style="color: #ffffff;"></i> Preview RPS
+                </a>
+
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="tambah.php?username=<?= $nama ?>&id=<?= $id ?>">
+                    <i class="fa-solid fa-eye fa-sm" style="color: #ffffff;"></i> View RPS
+                </a>
+
+            </div>
+            <div class="col-10 p-4 px-5" style="margin-left: calc(16.66666667%);" >
+                </h2>
+                <div style="width: 100%; height: 2px; background-color: #4A1B9D; margin: auto;" ></div>
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-3" >
+                    Identitas RPS
+                </div>
+                <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto mt-2 p-1 rounded-end-4 position-relative overflow-hidden" >
+                    <a href="" data-bs-toggle="modal" data-bs-target="#identitas" style="width: auto; letter-spacing: 2px;" class="amikom-btn text-decoration-none rounded-start-4 text-center py-1 position-absolute top-0 end-0" >
+                        <i class="fas fa-pen fa-sm"></i> Edit
+                    </a>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr class="text-center" style="font-size: 0.8rem;">
+                                <td>Mata Kuliah</td>
+                                <td>Kode</td>
+                                <td>Semester</td>
+                                <td>Bobot SKS</td>
+                                <td>Progran Studi</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <th>Perancangan Web</th>
+                                <th>DT097</th>
+                                <th>2</th>
+                                <th>2 Teori / 2 Praktikum </th>
+                                <th>D3 Teknik Informatika</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered border-black" style="width: 90%; margin: auto;">
+                        <thead>
+                            <tr class="text-center" style="font-size: 0.8rem;">
+                                <td style="width: 25%;">Nomor RPS</td>
+                                <td>Disusun</td>
+                                <td>Berlaku</td>
+                                <td style="width: 25%;">Revisi</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <th>DT097/01/2023</th>
+                                <th>23-May-2023</th>
+                                <th>23-Sept-2023</th>
+                                <th>00</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered border-black mt-3" style="width: 90%; margin: auto;">
+                        <thead>
+                            <tr class="text-center" style="font-size: 0.8rem;">
+                                <td style="width: 25%;">Dekan</td>
+                                <td style="width: 25%;">Kaprodi</td>
+                                <td style="width: 25%;">Sekretaris Prodi</td>
+                                <td style="width: 25%;">Dosen Pengampu</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" style="font-size: .8rem;">
+                                <th>Abyan Musyaffa, M.Kom</th>
+                                <th>Alif Aufa, M.Cs</th>
+                                <th>Novita Aprilia, M.Si</th>
+                                <th>Putri April, S.Kom</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-center my-3">Persentase Penilaian</p>
+                    <table class="table table-sm table-bordered border-black mb-3" style="width: 45%; margin: auto;">
+                        <thead>
+                            <tr class="text-center" style="font-size: 0.8rem;">
+                                <td style="width: 25%;">Presensi</td>
+                                <td style="width: 25%;">UTS</td>
+                                <td style="width: 25%;">UAS</td>
+                                <td style="width: 25%;">Tugas</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" style="font-size: .8rem;">
+                                <th>5 %</th>
+                                <th>35 %</th>
+                                <th>40 %</th>
+                                <th>20 %</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-5" >
+                    Gambaran Umum
+                </div>
+                <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto mt-2 p-1 rounded-end-4">
+                    <table class="table table-borderless mb-0">
+                            <tr>
+                                <td style="width: 94%;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat ea provident suscipit voluptatem itaque, consectetur  ipsam numquam dolores impedit animi?</td>
+                                <td style="text-align: center;">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#gambaranEdit" style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-pen fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                    <a href="" style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-trash fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div style="width: 100%; height: 1px; background-color: #4A1B9D; margin: auto;" ></div>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+                <a href="" data-bs-toggle="modal" data-bs-target="#gambaranTambah" class="amikom-btn btn btn-sm float-end me-3 mt-1" style="width: auto; font-size: .6rem;">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-5" >
+                    Capaian Pembelajaran
+                </div>
+                <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto mt-2 p-1 rounded-end-4">
+                    <table class="table table-borderless mb-0">
+                            <tr>
+                                <td style="width: 94%;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat ea provident suscipit voluptatem itaque, consectetur  ipsam numquam dolores impedit animi?</td>
+                                <td style="text-align: center;">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#capaianEdit" style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-pen fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                    <a href="" style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-trash fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div style="width: 100%; height: 1px; background-color: #4A1B9D; margin: auto;" ></div>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+                <a href="" data-bs-toggle="modal" data-bs-target="#capaianTambah" class="amikom-btn btn btn-sm float-end me-3 mt-1" style="width: auto; font-size: .6rem;">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-5" >
+                    Prasyarat
+                </div>
+                <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto mt-2 p-1 rounded-end-4">
+                    <table class="table table-borderless mb-0">
+                            <tr>
+                                <td style="width: 94%;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat ea provident suscipit voluptatem itaque, consectetur  ipsam numquam dolores impedit animi?</td>
+                                <td style="text-align: center;">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#prasyaratEdit"  style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-pen fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                    <a href="" style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-trash fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div style="width: 100%; height: 1px; background-color: #4A1B9D; margin: auto;" ></div>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+                <a href="" data-bs-toggle="modal" data-bs-target="#prasyaratTambah" class="amikom-btn btn btn-sm float-end me-3 mt-1" style="width: auto; font-size: .6rem;">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-5" >
+                    Unit Pembelajaran
+                </div>
+                <table class="table table-bordered mb-0" style="font-size: .7rem; border: 2px solid #4A1B9D;">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="width: 18%;">Kemampuan Akhir yang Diharapkan</th>
+                            <th style="width: 14%;">Indikator</th>
+                            <th style="width: 14%;">Bahan Kajian</th>
+                            <th style="width: 14%;">Metode Pembelajaran</th>
+                            <th style="width: 6%;">Waktu</th>
+                            <th style="width: 14%;">Metode Penilaian</th>
+                            <th style="width: 14%;">Bahan Ajar</th>
+                            <th style="width: 6%;">Apa?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos fugiat hic tenetur fugit, a cupiditate.</td>
+                            <td>Lorem ipsum dolor sit amet.</td>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, culpa!</td>
+                            <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, esse!</td>
+                            <td>Lorem, ipsum d</td>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                            <td>Lorem ipsum dolor, sit amet consectetur adipisicing.</td>
+                            <td class="text-center" style="font-size: 1rem;">
+                                <a href="" data-bs-toggle="modal" data-bs-target="#unitEdit" style="letter-spacing: 2px; text-decoration: none;" >
+                                    <i class="fas fa-pen fa-sm" style="color: #4A1B9D;"></i>
+                                </a>
+                                <a href="" style="letter-spacing: 2px; text-decoration: none;" >
+                                    <i class="fas fa-trash fa-sm" style="color: #4A1B9D;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="" data-bs-toggle="modal" data-bs-target="#unitTambah" class="amikom-btn btn btn-sm float-end me-3 mt-1" style="width: auto; font-size: .6rem;">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+            
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-5" >
+                    Tugas & Penilaian
+                </div>
+                <table class="table table-bordered mb-0" style="font-size: .7rem; border: 2px solid #4A1B9D;">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="width: 18%;">Tugas/Aktivitas</th>
+                            <th style="width: 20%;">Kemampuan akhir yang diharapkan atau dievaluasi</th>
+                            <th style="width: 10%;">Waktu</th>
+                            <th style="width: 10%;">Bobot</th>
+                            <th style="width: 18%;">Kriteria Penilaian</th>
+                            <th style="width: 18%;">Indikator Penilaian</th>
+                            <th style="width: 6%;">Apa?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos fugiat hic tenetur fugit, a cupiditate.</td>
+                            <td>Lorem ipsum dolor sit amet.</td>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, culpa!</td>
+                            <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, esse!</td>
+                            <td>Lorem, ipsum d</td>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                            <td class="text-center" style="font-size: 1rem;">
+                                <a href="" data-bs-toggle="modal" data-bs-target="#tugasEdit" style="letter-spacing: 2px; text-decoration: none;" >
+                                    <i class="fas fa-pen fa-sm" style="color: #4A1B9D;"></i>
+                                </a>
+                                <a href="" style="letter-spacing: 2px; text-decoration: none;" >
+                                    <i class="fas fa-trash fa-sm" style="color: #4A1B9D;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="" data-bs-toggle="modal" data-bs-target="#tugasTambah" class="amikom-btn btn btn-sm float-end me-3 mt-1" style="width: auto; font-size: .6rem;">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-5" >
+                    Referensi
+                </div>
+                <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto mt-2 p-1 rounded-end-4">
+                    <table class="table table-borderless mb-0">
+                            <tr>
+                                <td style="width: 94%;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat ea provident suscipit voluptatem itaque, consectetur  ipsam numquam dolores impedit animi?</td>
+                                <td style="text-align: center;">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#referensiEdit" style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-pen fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                    <a href="" style="letter-spacing: 2px; text-decoration: none;" >
+                                        <i class="fas fa-trash fa-sm" style="color: #4A1B9D;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div style="width: 100%; height: 1px; background-color: #4A1B9D; margin: auto;" ></div>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+                <a href=""  data-bs-toggle="modal" data-bs-target="#referensiTambah" class="amikom-btn btn btn-sm float-end me-3 mt-1" style="width: auto; font-size: .6rem;">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+
+                <div style="width: 15%; background-color: #4A1B9D; color: white;" class=" rounded-end-4 align-content-center py-1 ps-3 mb-2 mt-5" >
+                    Rencana Pembelajaran
+                </div>
+                <table class="table table-bordered mb-0" style="font-size: .7rem; border: 2px solid #4A1B9D;">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="width: 10%;">Minggu/pertemuan</th>
+                            <th style="width: 18%;">Kemampuan Akhir yang Diharapkan</th>
+                            <th style="width: 14%;">Indikator</th>
+                            <th style="width: 14%;">Topik & Sub Topik</th>
+                            <th style="width: 14%;">Aktivitas dan Strategi Pembelajaran</th>
+                            <th style="width: 10%;">Waktu</th>
+                            <th style="width: 14%;">Penilaian</th>
+                            <th style="width: 6%;">Apa?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos fugiat hic tenetur fugit, a cupiditate.</td>
+                            <td>Lorem ipsum dolor sit amet.</td>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, culpa!</td>
+                            <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, esse!</td>
+                            <td>Lorem, ipsum d</td>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                            <td>Lorem ipsum dolor, sit amet consectetur adipisicing.</td>
+                            <td class="text-center" style="font-size: 1rem;">
+                                <a href="" data-bs-toggle="modal" data-bs-target="#rencanaEdit" style="letter-spacing: 2px; text-decoration: none;" >
+                                    <i class="fas fa-pen fa-sm" style="color: #4A1B9D;"></i>
+                                </a>
+                                <a href="" style="letter-spacing: 2px; text-decoration: none;" >
+                                    <i class="fas fa-trash fa-sm" style="color: #4A1B9D;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href=""  data-bs-toggle="modal" data-bs-target="#rencanaTambah" class="amikom-btn btn btn-sm float-end me-3 mt-1" style="width: auto; font-size: .6rem;">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+    
+    <!-- Modal Identitas -->
+    <div class="modal fade modal-lg" id="identitas" tabindex="-1" aria-labelledby="identitasLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Identitas RPS</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto mt-2 pb-3 rounded-end-4">
+                        <div class="col-6 d-grid align-content-start">
+                            <label class="" for="mata_kuliah">Mata Kuliah</label>
+                            <select name="mata_kuliah" id="mata_kuliah">
+                                <option value="1">Multimedia</option>
+                                <option value="2">Fotografi</option>
+                            </select>
+
+                            <label class="" for="dosen_pengampu">Dosen Pengampu</label>
+                            <select name="dosen_pengampu" id="dosen_pengampu">
+                                <option value="1">Abyan Musyaffa</option>
+                                <option value="2">Alif Aufa</option>
+                            </select>
+                            
+                            <label for="nomor">Nomor</label>
+                            <input type="text" name="nomor" id="nomor" placeholder="00/RPS/0000" required>
+
+                            <label for="revisi">Revisi</label>
+                            <input type="text" name="revisi" id="revisi">
+
+                            <label>Detail Prosentasi Penilaian</label>
+                            <div id="detail">
+                                <label for="penilaian_presensi">Presensi</label>
+                                <input type="text" name="penilaian_presensi" id="penilaian_presensi" placeholder="00%">
+                                <br>
+                                <label for="penilaian_mid">Ujian Mid</label>
+                                <input type="text" name=penilaian_"mid" id="penilaian_mid" placeholder="00%">
+                                <br>
+                                <label for="penilaian_akhir">Ujian Akhir</label>
+                                <input type="text" name="penilaian_akhir" id="penilaian_akhir" placeholder="00%">
+                                <br>
+                                <label for="penilaian_tugas">Tugas</label>
+                                <input type="text" name="penilaian_tugas" id="penilaian_tugas" placeholder="00%">
+                            </div>
+                           
+                            
+                        </div>
+                        <div class="col-6 d-grid align-content-start">
+                            
+                            <label for="tanggal_susun">Tanggal Disusun</label>
+                            <input type="date" name="tanggal_susun" id="tanggal_susun" required>
+                            
+                            <label for="tanggal_berlaku">Tanggal Berlaku</label>
+                            <input type="date" name="tanggal_berlaku" id="tanggal_berlaku" required>
+                            
+                            <label class="" for="dosen_dekan">Dekan</label>
+                            <select name="dosen_dekan" id="dosen_dekan">
+                                <option value="1">Abyan Musyaffa</option>
+                                <option value="2">Alif Aufa</option>
+                            </select>
+
+                            <label class="" for="dosen_kaprodi">Kaprodi</label>
+                            <select name="dosen_kaprodi" id="dosen_kaprodi">
+                                <option value="1">Abyan Musyaffa</option>
+                                <option value="2">Alif Aufa</option>
+                            </select>
+
+                            <label class="" for="dosen_sekretaris">Sekretaris Prodi</label>
+                            <select name="dosen_sekretaris" id="dosen_sekretaris">
+                                <option value="1">Abyan Musyaffa</option>
+                                <option value="2">Alif Aufa</option>
+                            </select>
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Gambaran -->
+    <div class="modal fade modal-lg" id="gambaranEdit" tabindex="-1" aria-labelledby="gambaranEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Gambaran Umum</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid mb-3" id="gambaran_umum">
+                            <label for="content_gambaran">Gambaran Umum</label>
+                            <textarea name="content_gambaran" id="content_gambaran" rows="2" required>
+                            </textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade modal-lg" id="gambaranTambah" tabindex="-1" aria-labelledby="gambaranTambahLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Gambaran Umum</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid mb-3" id="gambaran_umum">
+                            <label for="content_gambaran">Gambaran Umum</label>
+                            <textarea name="content_gambaran" id="content_gambaran" rows="2" required>
+                            </textarea>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Capaian -->
+    <div class="modal fade modal-lg" id="capaianEdit" tabindex="-1" aria-labelledby="capaianEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Capaian Pembelajaran</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid mb-3" id="capaian_pembelajaran">
+                            <label for="content_capaian">Capaian Pembelajaran</label>
+                            <textarea name="content_capaian" id="content_capaian" rows="2" required>
+                            </textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade modal-lg" id="capaianTambah" tabindex="-1" aria-labelledby="capaianTambahLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Capaian Pembelajaran</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid mb-3" id="capaian_pembelajaran">
+                            <label for="content_capaian">Capaian Pembelajaran</label>
+                            <textarea name="content_capaian" id="content_capaian" rows="2" required>
+                            </textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Prasyarat -->
+    <div class="modal fade modal-lg" id="prasyaratEdit" tabindex="-1" aria-labelledby="prasyaratEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Prasyarat</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid mb-3">
+                            <label for="content_prasyarat">Prasyarat dan Pengetahuan Awal (Prior Knowledge)</label>
+                            <textarea name="content_prasyarat" id="content_prasyarat" rows="3" required>
+                            </textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade modal-lg" id="prasyaratTambah" tabindex="-1" aria-labelledby="prasyaratTambahLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Prasyarat</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid mb-3">
+                            <label for="content_prasyarat">Prasyarat dan Pengetahuan Awal (Prior Knowledge)</label>
+                            <textarea name="content_prasyarat" id="content_prasyarat" rows="3" required>
+                            </textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Unit -->
+    <div class="modal fade modal-lg" id="unitEdit" tabindex="-1" aria-labelledby="unitEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Unit Pembelajaran</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid">
+                            <label for="unit_kemampuan">Kemampuan Akhir yang Diharapakan</label>
+                            <textarea name="unit_kemampuan" id="unit_kemampuan" rows="2" required>
+                            </textarea>
+                        </div>
+                        <div class="col d-grid">
+                            <label for="unit_indikator">Indikator</label>
+                            <textarea name="unit_indikator" id="unit_indikator" rows="2" required>
+                            </textarea>
+                        </div>
+                        <div class="row p-0 m-auto">
+                            <div class="col">
+                                <label for="bahan_kajian">Bahan Kajian</label>
+                                <textarea class="w-100" name="bahan_kajian" id="bahan_kajian" rows="2" required>
+                                </textarea>
+                            </div>
+                            <div class="col">
+                                <label for="metode_pembelajaran">Metode Pembelajaran</label>
+                                <textarea class="w-100" name="metode_pembelajaran" id="metode_pembelajaran" rows="2" required>
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="row p-0 m-auto align-items-start">
+                            <div class="col">
+                                <label for="metode_penilaian">Metode Penilaian</label>
+                                <textarea class="w-100" name="metode_penilaian" id="metode_penilaian" rows="2" required>
+                                </textarea>
+                            </div>
+                            <div class="col d-grid">
+                                <label for="unit_waktu">Waktu</label>
+                                <input class="w-100" type="text" name="unit_waktu" id="unit_waktu" placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="bahan_ajar">Bahan Ajar</label>
+                                <textarea class="w-100" name="bahan_ajar" id="bahan_ajar" rows="2" required>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade modal-lg" id="unitTambah" tabindex="-1" aria-labelledby="unitTambahLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Unit Pembelajaran</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="col d-grid">
+                            <label for="unit_kemampuan">Kemampuan Akhir yang Diharapakan</label>
+                            <textarea name="unit_kemampuan" id="unit_kemampuan" rows="2" required>
+                            </textarea>
+                        </div>
+                        <div class="col d-grid">
+                            <label for="unit_indikator">Indikator</label>
+                            <textarea name="unit_indikator" id="unit_indikator" rows="2" required>
+                            </textarea>
+                        </div>
+                        <div class="row p-0 m-auto">
+                            <div class="col">
+                                <label for="bahan_kajian">Bahan Kajian</label>
+                                <textarea class="w-100" name="bahan_kajian" id="bahan_kajian" rows="2" required>
+                                </textarea>
+                            </div>
+                            <div class="col">
+                                <label for="metode_pembelajaran">Metode Pembelajaran</label>
+                                <textarea class="w-100" name="metode_pembelajaran" id="metode_pembelajaran" rows="2" required>
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="row p-0 m-auto align-items-start">
+                            <div class="col">
+                                <label for="metode_penilaian">Metode Penilaian</label>
+                                <textarea class="w-100" name="metode_penilaian" id="metode_penilaian" rows="2" required>
+                                </textarea>
+                            </div>
+                            <div class="col d-grid">
+                                <label for="unit_waktu">Waktu</label>
+                                <input class="w-100" type="text" name="unit_waktu" id="unit_waktu" placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="bahan_ajar">Bahan Ajar</label>
+                                <textarea class="w-100" name="bahan_ajar" id="bahan_ajar" rows="2" required>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Tugas -->
+    <div class="modal fade modal-lg" id="tugasEdit" tabindex="-1" aria-labelledby="tugasEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Tugas & Penilaian</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="row p-0 m-auto align-items-start mb-3">
+                            <div class="col">
+                                <label for="tugas">Tugas/Aktivitas</label>
+                                <input class="w-100" type="text" name="tugas" id="tugas" placeholder="" required>
+                            </div>
+                            <div class="col d-grid">
+                                <label for="tugas_waktu">Waktu</label>
+                                <input class="w-100" type="text" name="tugas_waktu" id="tugas_waktu" placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="bobot">Bobot</label>
+                                <input class="w-100" type="text" name="bobot" id="bobot" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col d-grid mb-3">
+                            <label for="tugas_kemampuan">Kemampuan Akhir yang Diharapakan atau dievaluasi</label>
+                            <textarea name="tugas_kemampuan" id="tugas_kemampuan" rows="2" required>
+                            </textarea>
+                        </div>
+                        <div class="row p-0 m-auto">
+                            <div class="col">
+                                <label for="kriteria_penilaian">Kriteria Penilaian</label>
+                                <textarea class="w-100" name="kriteria_penilaian" id="kriteria_penilaian" rows="2" required>
+                                </textarea>
+                            </div>
+                            <div class="col">
+                                <label for="tugas_indikator">Indikator Penilaian</label>
+                                <textarea class="w-100" name="tugas_indikator" id="tugas_indikator" rows="2" required>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade modal-lg" id="tugasTambah" tabindex="-1" aria-labelledby="tugasTambahLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Tugas & Penilaian</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3">
+                        <div class="row p-0 m-auto align-items-start mb-3">
+                            <div class="col">
+                                <label for="tugas">Tugas/Aktivitas</label>
+                                <input class="w-100" type="text" name="tugas" id="tugas" placeholder="" required>
+                            </div>
+                            <div class="col d-grid">
+                                <label for="tugas_waktu">Waktu</label>
+                                <input class="w-100" type="text" name="tugas_waktu" id="tugas_waktu" placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="bobot">Bobot</label>
+                                <input class="w-100" type="text" name="bobot" id="bobot" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col d-grid mb-3">
+                            <label for="tugas_kemampuan">Kemampuan Akhir yang Diharapakan atau dievaluasi</label>
+                            <textarea name="tugas_kemampuan" id="tugas_kemampuan" rows="2" required>
+                            </textarea>
+                        </div>
+                        <div class="row p-0 m-auto">
+                            <div class="col">
+                                <label for="kriteria_penilaian">Kriteria Penilaian</label>
+                                <textarea class="w-100" name="kriteria_penilaian" id="kriteria_penilaian" rows="2" required>
+                                </textarea>
+                            </div>
+                            <div class="col">
+                                <label for="tugas_indikator">Indikator Penilaian</label>
+                                <textarea class="w-100" name="tugas_indikator" id="tugas_indikator" rows="2" required>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Referensi -->
+    <div class="modal fade modal-lg" id="referensiEdit" tabindex="-1" aria-labelledby="referensiEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Referensi</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3" id="ref">
+                        <div class="row p-0 m-auto align-items-start mb-3">
+                            <div class="col">
+                                <label for="content_referensi">Referensi</label>
+                                <input class="w-100" type="text" name="content_referensi" id="content_referensi" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade modal-lg" id="referensiTambah" tabindex="-1" aria-labelledby="referensiTambahLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Referensi</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="row w-100 m-auto d-grid pb-3 rounded-end-4 mb-3" id="ref">
+                        <div class="row p-0 m-auto align-items-start mb-3">
+                            <div class="col">
+                                <label for="content_referensi">Referensi</label>
+                                <input class="w-100" type="text" name="content_referensi" id="content_referensi" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Rencana -->
+    <div class="modal fade modal-lg" id="rencanaEdit" tabindex="-1" aria-labelledby="rencanaEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Rencana Pemebelajaran</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="w-100 m-auto p-3 rounded-end-4">
+                        <div class="row w-100 m-auto column-gap-2">
+                            <div class="col-1 p-0 d-grid">
+                                <input type="hidden" name="id_kuliah" id="id_kuliah" value="<?= $id ?>">    
+                            
+                                <label for="minggu">Minggu</label>
+                                <select name="minggu" id="minggu">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                </select>
+                            
+                            </div>
+                            <div class="col-2 p-0 d-grid">
+                                
+                                <label for="waktu">Waktu</label>
+                                <input type="text" name="waktu" id="waktu" value="100 Menit">
+                                
+                            </div>    
+                            <div class="col p-0 d-grid">
+                                
+                                <label for="actv">Aktivitas dan Strategi Pembelajaran</label>
+                                <input type="text" name="actv" id="actv">
+
+                                
+                            </div>    
+                            <div class="col-4 p-0 d-grid">
+                                
+                                <label for="nilai">Penilaian</label>
+                                <input type="text" name="nilai" id="nilai">
+                                
+                            </div>    
+                        </div>
+
+                        <div class="row w-100 m-auto column-gap-2">
+                            <div class="col-4 p-0 d-grid">
+                                
+                                <label for="kmp_akhir">Kemampuan Akhir yang Diharapkan</label>
+                                <textarea cols="30" rows="3" name="kmp_akhir" id="kmp_akhir"></textarea>
+                                
+                            </div>    
+                            <div class="col p-0 d-grid">
+                                
+                                <label for="ind">Indiaktor</label>
+                                <textarea cols="30" rows="3" name="ind" id="ind"></textarea>
+
+                                
+                            </div>    
+                            <div class="col-4 p-0 d-grid">
+                                
+                                <label for="topik">Topik & Sub Topik</label>
+                                <textarea cols="30" rows="3" name="topik" id="topik"></textarea>
+                                
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade modal-lg" id="rencanaTambah" tabindex="-1" aria-labelledby="rencanaTambahLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Rencana Pemebelajaran</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="d-grid" action="" method="post">
+                    <div style="border: 2px solid #4A1B9D;" class="w-100 m-auto p-3 rounded-end-4">
+                        <div class="row w-100 m-auto column-gap-2">
+                            <div class="col-1 p-0 d-grid">
+                                <input type="hidden" name="id_kuliah" id="id_kuliah" value="<?= $id ?>">    
+                            
+                                <label for="minggu">Minggu</label>
+                                <select name="minggu" id="minggu">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                </select>
+                            
+                            </div>
+                            <div class="col-2 p-0 d-grid">
+                                
+                                <label for="waktu">Waktu</label>
+                                <input type="text" name="waktu" id="waktu" value="100 Menit">
+                                
+                            </div>    
+                            <div class="col p-0 d-grid">
+                                
+                                <label for="actv">Aktivitas dan Strategi Pembelajaran</label>
+                                <input type="text" name="actv" id="actv">
+
+                                
+                            </div>    
+                            <div class="col-4 p-0 d-grid">
+                                
+                                <label for="nilai">Penilaian</label>
+                                <input type="text" name="nilai" id="nilai">
+                                
+                            </div>    
+                        </div>
+
+                        <div class="row w-100 m-auto column-gap-2">
+                            <div class="col-4 p-0 d-grid">
+                                
+                                <label for="kmp_akhir">Kemampuan Akhir yang Diharapkan</label>
+                                <textarea cols="30" rows="3" name="kmp_akhir" id="kmp_akhir"></textarea>
+                                
+                            </div>    
+                            <div class="col p-0 d-grid">
+                                
+                                <label for="ind">Indiaktor</label>
+                                <textarea cols="30" rows="3" name="ind" id="ind"></textarea>
+
+                                
+                            </div>    
+                            <div class="col-4 p-0 d-grid">
+                                
+                                <label for="topik">Topik & Sub Topik</label>
+                                <textarea cols="30" rows="3" name="topik" id="topik"></textarea>
+                                
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+        </div>
+        </div>
+    </div>
+
+
+
+    <script src="src/bootstrap.js" ></script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b91f07c834.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/bootstrap.css">
+    <title>Dashbaord</title>
+    <style>
+        .amikom-clr-2 {
+            color: #FFAC00;
+        }
+        .amikom-bg {
+            background-color: #4A1B9D;
+        }
+        .amikom-clr {
+            color: #4A1B9D;
+        }
+        .amikom-btn {
+            background-color: #4A1B9D;
+            color: white;
+        }
+        .amikom-btn:hover {
+            background-color: #5d2eae;
+            color: white;
+        }
+        .amikom-btn-2 {
+            letter-spacing: 2px;
+            background-color: #5d2eae;
+            color: white;
+        }
+        .amikom-btn-2:hover {
+            background-color: #3b0e88;
+            color: white;
+        }
+
+        .aktif {
+            background-color: #3b0e88;
+        }
+        table a {
+            text-decoration: none;
+            color: black;
+        }
+        table a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div style="height: 100vh;" class="row">
+            <div class="col-2 amikom-bg p-4">
+                <a class="ms-2" href="logout.php"><i class="fa-solid fa-power-off fa-xl" style="color: #ffffff;"></i></a>
+                
+                <a class="btn aktif amikom-btn-2 w-100 py-2 rounded-4 mt-5  d-block" href="">
+                    <i class="fa-solid fa-chart-line" style="color: #ffffff;"></i> Dashboard
+                </a>
+
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="buat.php?username=<?= $nama ?>">
+                    <i class="fa-solid fa-folder-plus fa-sm" style="color: #ffffff;"></i> Buat RPS
+                </a>
+
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="daftar.php?username=<?= $nama ?>">
+                    <i class="fa-solid fa-list fa-sm" style="color: #ffffff;"></i> Daftar RPS
+                </a>
+
+            </div>
+            <div class="col-10 p-4 px-5">
+                <h2 class="text-center">Selamat Datang, <br>
+                <span class="amikom-clr"><?= $namaLengkap  ?></span>
+                </h2>
+                <h5 class="mb-5 text-center amikom-clr-2"><?= $nim ?></h5>
+                <div style="width: 100%; height: 2px; background-color: #4A1B9D; margin: auto;" ></div>
+                
+                <h5 class="my-3">RPS Terkini</h5>
+
+                <table class="table table-striped table-hover">
+                    <thead class="text-center">
+                      <tr>
+                        <th scope="col">Mata Kuliah</th>
+                        <th scope="col">Kode</th>
+                        <th scope="col">Program Studi</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">SKS</th>
+                        <th scope="col" style="width: 6%;">Apa?</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($result as $mk) : ?>
+
+                        <tr>
+                            <td class="text-center"><?= $mk["nm_kuliah"] ?></td>
+                            <td class="text-center"><?= $mk["kd_kuliah"] ?></td>
+                            <td class="text-center"><?= $mk["prg_studi"] ?></td>
+                            <td class="text-center"><?= $mk["smt"] ?></td>
+                            <td class="text-center"><?= $mk["sks"] ?></td>
+                            <td>
+                                <a href=""><i class="fa-solid fa-rectangle-list fa-xs" style="color: #000000;"></i> Materi</a> <br>
+                                <a href="" target="_blank"><i class="fa-solid fa-eye fa-xs" style="color: #000000;"></i> Lihat</a> <br>
+                            </td>
+                        </tr>
+
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+                <!-- <div class="text-center mt-5">
+                    <a class="btn btn-sm amikom-btn rounded-5 px-3" id="btnHome" href="daftar.php?username=<?= $nama ?>" role="button">Lainnya</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <script src="src/bootstrap.js" ></script>
+
+</body>
+</html>

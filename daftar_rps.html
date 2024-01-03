@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b91f07c834.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/bootstrap.css">
+    <title>Daftar RPS</title>
+    <style>
+        .amikom-clr-2 {
+            color: #FFAC00;
+        }
+        .amikom-bg {
+            background-color: #4A1B9D;
+        }
+        .amikom-clr {
+            color: #4A1B9D;
+        }
+        .amikom-btn {
+            background-color: #4A1B9D;
+            color: white;
+        }
+        .amikom-btn:hover {
+            background-color: #5d2eae;
+            color: white;
+        }
+        .amikom-btn-2 {
+            letter-spacing: 2px;
+            background-color: #5d2eae;
+            color: white;
+        }
+        .amikom-btn-2:hover {
+            background-color: #3b0e88;
+            color: white;
+        }
+
+        .aktif {
+            background-color: #3b0e88;
+        }
+
+        form input {
+            border: 3px solid #4A1B9D;
+            font-size: 14px;
+            border-radius: 15px;
+            padding: 0 10px;
+        }
+        form button {
+            border-radius: 15px;
+            padding: 1px 10px;
+            font-size: 14px;
+            border: 2px solid #4A1B9D;
+            margin-left: -30px;
+        }
+        table a {
+            color: black;
+            margin: 0 2px;
+        }
+        table a:hover {
+            color: #4A1B9D;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div style="height: 100vh;" class="row">
+            <div class="col-2 amikom-bg p-4">
+                <a class="ms-2" href="logout.php"><i class="fa-solid fa-power-off fa-xl" style="color: #ffffff;"></i></a>
+                
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-5  d-block" href="index.php?username=<?= $nama ?>">
+                    <i class="fa-solid fa-chart-line" style="color: #ffffff;"></i> Dashboard
+                </a>
+
+                <a class="btn amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="buat.php?username=<?= $nama ?>">
+                    <i class="fa-solid fa-folder-plus fa-sm" style="color: #ffffff;"></i> Buat RPS
+                </a>
+
+                <a class="btn aktif amikom-btn-2 w-100 py-2 rounded-4 mt-3 d-block" href="">
+                    <i class="fa-solid fa-list fa-sm" style="color: #ffffff;"></i> Daftar RPS
+                </a>
+
+            </div>
+            <div class="col-10 p-4 px-5">
+
+                <div style="width: 100%; height: 2px; background-color: #4A1B9D; margin: auto;" ></div>
+                
+                <h5 class="my-3">Daftar RPS</h5>
+
+                <form action="" method="post">
+                    <input type="text" name="keyword" placeholder="Cari RPS" autofocus>
+                    <button class="amikom-btn mb-3" type="submit" name="cari">Cari</button>
+                </form>
+
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Mata Kuliah</th>
+                        <th scope="col">Kode</th>
+                        <th scope="col">Program Studi</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">SKS</th>
+                        <th scope="col">Apa?</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php $i = 1; ?>
+                    <?php foreach($result as $mk) : ?>
+
+                        <tr>
+                            <th class="text-center" scope="row"><?= $i ?></th>
+                            <td><?= $mk["nm_kuliah"] ?></td>
+                            <td class="text-center"><?= $mk["kd_kuliah"] ?></td>
+                            <td class="text-center"><?= $mk["prg_studi"] ?></td>
+                            <td class="text-center"><?= $mk["smt"] ?></td>
+                            <td class="text-center"><?= $mk["sks"] ?></td>
+                            <td class="text-center">
+                                <a href=""><i class="fa-solid fa-pen " ></i></a>
+                                <a href=""><i class="fa-solid fa-rectangle-list " ></i></a>
+                                <a href="" target="_blank"><i class="fa-solid fa-eye " ></i></a>
+                                <a href="" onclick="return confirm('Anda yakin menghapus RPS ini?')"><i class="fa-solid fa-trash " ></i></a>
+                            </td>
+                        </tr>
+
+                    <?php $i++ ?>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/bootstrap.js" ></script>
+
+</body>
+</html>
